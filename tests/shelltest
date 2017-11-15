@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "Test 1 - invalid command"
+echo "test1" | ./shell
+echo "" | ./shell
+echo "Test 2 - valid command"
+echo "/bin/ls" | ./shell
+echo "/bin/pwd" | ./shell
+echo "/usr/bin/whoami" | ./shell
