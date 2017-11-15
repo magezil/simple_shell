@@ -21,10 +21,11 @@ int main(int argc, char *argv[])
 		if (line == NULL)
 		{
 			perror("Invalid line");
-			return(-1);
+			return (-1);
 		}
 		else if (line[0] == EOF)
 		{
+			free(line);
 			break;
 		}
 		else if (line[0] != '\0')
@@ -34,21 +35,21 @@ int main(int argc, char *argv[])
 			if (child == -1)
 			{
 				perror("Failed to create process");
-				return(-1);
+				free(line);
+				return (-1);
 			}
 			else if (child == 0)
 			{
-				/* NOT FOUND */
 				if (stat(tokens[0], &st) != 0)
 				{
 					fprintf(stderr, "%s: command not found: %s\n",
 							argv[0], tokens[0]);
-					return (-1);
+					free(line);
+					free(tokens);
+					break;
 				}
 				else
-				{
 					execv(tokens[0], tokens);
-				}
 			}
 			else
 			{
@@ -58,7 +59,5 @@ int main(int argc, char *argv[])
 			}
 		}
 	}
-	free(line);
-	free(tokens);
 	return (0);
 }

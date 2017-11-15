@@ -13,8 +13,8 @@ char *get_line(void)
 	line = malloc(sizeof(char) * BUF_SIZE);
 	if (line == NULL)
 	{
-		fprintf(stderr, "Failed to allocate memory\n");
-		exit(EXIT_FAILURE);
+		perror("Failed to allocate memory\n");
+		return (NULL);
 	}
 	index = 0;
 	while (1)
