@@ -12,4 +12,5 @@
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *get_line(void);
 char **tokenize_line(char *line);
+void non_interactive_mode(void);
 #endif
