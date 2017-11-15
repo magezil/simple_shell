@@ -20,14 +20,13 @@ char *get_line(void)
 	while (1)
 	{
 		c = getchar();
-		if (c == EOF || c == '\n')
+		if (c == EOF)
 		{
-			if (c == EOF)
-			{
-				line[index] = EOF;
-				return (line);
-
-			}
+			line[index] = EOF;
+			return (line);
+		}
+		else if (c == '\n')
+		{
 			line[index] = '\0';
 			return (line);
 		}
@@ -40,7 +39,7 @@ char *get_line(void)
 			line = _realloc(line, buffer_size - BUF_SIZE, buffer_size);
 			if (line == NULL)
 			{
-				fprintf(stderr, "Failed to allocate memory\n");
+				perror("Failed to allocate memory\n");
 				exit(EXIT_FAILURE);
 			}
 		}

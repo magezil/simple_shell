@@ -14,6 +14,36 @@ int main(int argc, char *argv[])
 	struct stat st;
 	(void) argc;
 
+	if (!isatty(0))
+	{
+		line = get_line();
+		tokens = tokenize_line(line);
+		child = fork();
+		if (child == -1)
+		{
+			perror("Failed to create process");
+			free(line);
+			return (-1);
+		}
+		else if (child == 0)
+		{
+			if (stat(tokens[0], &st) != 0)
+			{
+				perror(argv[0]);
+				free(line);
+				free(tokens);
+			}
+			else
+				execv(tokens[0], tokens);
+		}
+		else
+		{
+			wait(&status);
+			free(line);
+			free(tokens);
+		}
+	return (0);
+	}
 	while (1)
 	{
 		printf("simple_shell$ ");
@@ -25,6 +55,7 @@ int main(int argc, char *argv[])
 		}
 		else if (line[0] == EOF)
 		{
+			printf("\n");
 			free(line);
 			break;
 		}
@@ -42,8 +73,7 @@ int main(int argc, char *argv[])
 			{
 				if (stat(tokens[0], &st) != 0)
 				{
-					fprintf(stderr, "%s: command not found: %s\n",
-							argv[0], tokens[0]);
+					perror(argv[0]);
 					free(line);
 					free(tokens);
 					break;
