@@ -15,7 +15,7 @@ char *getpath(char *name)
 
 	if (name == NULL)
 		return (NULL);
-	if (name[0] == '/')
+	if (name[0] == '/' || name[0] == '.')
 		return (name);
 	path = malloc(BUF_SIZE);
 	if (path == NULL)
