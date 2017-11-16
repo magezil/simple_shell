@@ -18,4 +18,7 @@ void non_interactive_mode(void);
 int _strcmp(char *s1, char *s2);
 int _putchar(int c);
 void printenv(void);
+char *getpath(char *name);
+char *_getenv(const char *name);
+char *_strcpy(char *dest, char *src);
 #endif
