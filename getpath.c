@@ -15,7 +15,7 @@ char *getpath(char *name)
 
 	if (name == NULL)
 		return (NULL);
-	if (name[0] == '/' || name[0] == '.')
+	if (_strfind('/', name) || _strfind('.', name))
 		return (name);
 	path = malloc(BUF_SIZE);
 	if (path == NULL)
@@ -69,49 +69,4 @@ char *_getenv(const char *name)
 	}
 	/* no match */
 	return (NULL);
-}
-
-/**
- * _strcpy - copy a string
- * @dest: destination string
- * @src: source string
- *
- * Return: pointer to copy
- */
-char *_strcpy(char *dest, char *src)
-{
-	int i;
-
-	if (dest == NULL)
-		return (NULL);
-	if (src == NULL)
-		return (dest);
-	for (i = 0; src[i] != '\0'; i++)
-		dest[i] = src[i];
-	dest[i] = '\0';
-	return (dest);
-}
-
-/**
- * _strcat - concatinate two strings
- * @dest: destination string
- * @src: string to concat
- *
- * Return: pointer to copy
- */
-char *_strcat(char *dest, char *src)
-{
-	int i, len;
-
-	if (dest == NULL)
-		return (NULL);
-	if (src == NULL)
-		return (dest);
-
-	for (len = 0; dest[len] != '\0'; )
-		len++;
-	for (i = 0; src[i] != '\0'; i++)
-		dest[len + i] = src[i];
-	dest[len + i] = '\0';
-	return (dest);
 }

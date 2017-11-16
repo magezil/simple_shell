@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 		}
 		else if (line[0] == EOF)
 		{
-			printf("\n");
+			write(1, "\n", 1);
 			free(line);
 			break;
 		}
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 					break;
 				}
 				path = getpath(tokens[0]);
-				if (stat(path, &st) != 0)
+				if (path == NULL || stat(path, &st) != 0)
 				{
 					perror(argv[0]);
 					free(line);
