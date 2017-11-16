@@ -14,7 +14,7 @@ extern char **environ;
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *get_line(void);
 char **tokenize_line(char *line, char *delim);
-void non_interactive_mode(void);
+int non_interactive_mode(void);
 int _putchar(int c);
 
 void printenv(void);

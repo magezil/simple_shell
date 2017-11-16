@@ -18,8 +18,13 @@ int main(int argc, char *argv[])
 
 	if (!isatty(0))
 	{
-		non_interactive_mode();
-		return (0);
+		status = non_interactive_mode();
+		if (status == -1)
+		{
+			perror(argv[0]);
+			return -1;
+		}
+		return (status);
 	}
 	while (1)
 	{
@@ -31,10 +36,6 @@ int main(int argc, char *argv[])
 			perror("Invalid line");
 			return (-1);
 		}
-		else if (_strcmp(line, "exit") == 0)
-		{
-			return (0);
-		}
 		else if (line[0] == EOF)
 		{
 			write(1, "\n", 1);
@@ -44,6 +45,12 @@ int main(int argc, char *argv[])
 		else if (line[0] != '\0')
 		{
 			tokens = tokenize_line(line, " ");
+			if (_strcmp(tokens[0], "exit") == 0)
+			{
+				if (tokens[1] != NULL)
+					return (atoi(tokens[1]));
+				return (0);
+			}
 			child = fork();
 			if (child == -1)
 			{

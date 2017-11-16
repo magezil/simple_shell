@@ -2,28 +2,34 @@
 /**
  * non_interactive_mode - hands commands passed through a pipe
  *
- * Return: void
+ * Return: 0 if success, anything else for error
  */
-void non_interactive_mode(void)
+int non_interactive_mode(void)
 {
 	pid_t child;
 	char *line;
+	char *path;
 	char **tokens;
 	int status;
 	struct stat st;
 
 	line = get_line();
 	tokens = tokenize_line(line, " ");
+	if (_strcmp(tokens[0], "exit") == 0)
+	{
+		free(line);
+		free(tokens);
+		if (tokens[1] != NULL)
+			return (atoi(tokens[1]));
+		return (0);
+	}
 	child = fork();
 	if (child == -1)
 	{
 		perror("Failed to create process");
 		free(line);
-		return;
-	}
-	else if (_strcmp(line, "exit") == 0)
-	{
-		return;
+		free(tokens);
+		return (-1);
 	}
 	else if (child == 0)
 	{
@@ -31,14 +37,15 @@ void non_interactive_mode(void)
 		{
 			printenv();
 		}
-		else if (stat(tokens[0], &st) != 0)
+		path = getpath(tokens[0]);
+		if (path == NULL || stat(path, &st) != 0)
 		{
-			perror(line);
 			free(line);
 			free(tokens);
+			return (-1);
 		}
 		else
-			execv(tokens[0], tokens);
+			execv(path, tokens);
 	}
 	else
 	{
@@ -46,5 +53,5 @@ void non_interactive_mode(void)
 		free(line);
 		free(tokens);
 	}
-	return;	
+	return (0);
 }
