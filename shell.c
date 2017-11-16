@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
 			{
 				if (tokens[1] != NULL)
 					return (_atoi(tokens[1]));
+				free(line), free(tokens);
 				return (0);
 			}
 			child = fork();
@@ -76,15 +77,18 @@ int main(int argc, char *argv[])
 					break;
 				}
 				else
+				{
+					free(line);
 					execv(path, tokens);
+				}
 			}
 			else
 			{
-				wait(&status);
-				free(line);
 				free(tokens);
+				wait(&status);
 			}
 		}
+		free(line);
 	}
 	return (0);
 }

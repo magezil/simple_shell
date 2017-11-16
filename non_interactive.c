@@ -16,9 +16,9 @@ int non_interactive_mode(void)
 	tokens = tokenize_line(line, " ");
 	if (_strcmp(tokens[0], "exit") == 0)
 	{
-		free(line), free(tokens);
 		if (tokens[1] != NULL)
 			return (_atoi(tokens[1]));
+		free(line), free(tokens);
 		return (0);
 	}
 	child = fork();
@@ -38,7 +38,10 @@ int non_interactive_mode(void)
 			return (-1);
 		}
 		else
+		{
+			free(line);
 			execv(path, tokens);
+		}
 	}
 	else
 	{
