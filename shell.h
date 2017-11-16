@@ -13,7 +13,7 @@
 extern char **environ;
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *get_line(void);
-char **tokenize_line(char *line);
+char **tokenize_line(char *line, char *delim);
 void non_interactive_mode(void);
 int _strcmp(char *s1, char *s2);
 int _putchar(int c);
@@ -21,4 +21,5 @@ void printenv(void);
 char *getpath(char *name);
 char *_getenv(const char *name);
 char *_strcpy(char *dest, char *src);
+char *_strcat(char *dest, char *src);
 #endif

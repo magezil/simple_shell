@@ -5,7 +5,7 @@
  *
  * Return: pointer to an array of strings (tokens)
  */
-char **tokenize_line(char *line)
+char **tokenize_line(char *line, char *delim)
 {
 	char **args;
 	char *token;
@@ -22,11 +22,11 @@ char **tokenize_line(char *line)
 		fprintf(stderr, "Failed to allocate memory\n");
 		exit(EXIT_FAILURE);
 	}
-	token = strtok(line, " ");
+	token = strtok(line, delim);
 	while (token != NULL)
 	{
 		args[index] = token;
-		token = strtok(NULL, " ");
+		token = strtok(NULL, delim);
 		index++;
 	}
 	args[index] = NULL;

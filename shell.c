@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
 {
 	pid_t child;
 	char *line;
+	char *path;
 	char **tokens;
 	int status;
 	struct stat st;
@@ -41,7 +42,7 @@ int main(int argc, char *argv[])
 			}
 			else if (line[0] != '\0')
 			{
-				tokens = tokenize_line(line);
+				tokens = tokenize_line(line, " ");
 				child = fork();
 				if (child == -1)
 				{
@@ -56,7 +57,8 @@ int main(int argc, char *argv[])
 						printenv();
 						break;
 					}
-					else if (stat(tokens[0], &st) != 0)
+					path = getpath(tokens[0]);
+					if (stat(path, &st) != 0)
 					{
 						perror(argv[0]);
 						free(line);
@@ -64,7 +66,7 @@ int main(int argc, char *argv[])
 						break;
 					}
 					else
-						execv(tokens[0], tokens);
+						execv(path, tokens);
 				}
 				else
 				{
