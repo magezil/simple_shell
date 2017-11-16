@@ -29,6 +29,10 @@ int main(int argc, char *argv[])
 				perror("Invalid line");
 				return (-1);
 			}
+			else if (_strcmp(line, "exit") == 0)
+			{
+				return (0);
+			}
 			else if (line[0] == EOF)
 			{
 				printf("\n");
@@ -47,7 +51,12 @@ int main(int argc, char *argv[])
 				}
 				else if (child == 0)
 				{
-					if (stat(tokens[0], &st) != 0)
+					if (_strcmp(line, "env") == 0)
+					{
+						printenv();
+						break;
+					}
+					else if (stat(tokens[0], &st) != 0)
 					{
 						perror(argv[0]);
 						free(line);
