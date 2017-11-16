@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #define BUF_SIZE 200
 #define ARG_SIZE 10
+#define MAX 1024
 extern char **environ;
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *get_line(void);

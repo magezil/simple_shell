@@ -1,5 +1,32 @@
 #include "shell.h"
 /**
+ * get_char - reads an input of a character
+ *
+ * Return: the character read casted as an int
+ */
+int get_char(void)
+{
+	static char buffer[MAX];
+	static size_t start = 0;
+	static size_t end = 0;
+	int c = 0;
+ 
+	if (start == end) /* buffer is empty */
+	{
+		c = read(0, buffer, 1024);
+		if (c == 0)
+			return (EOF);
+		start = 0;
+		end = c;
+	}
+	if (c >= 0)
+	{
+		start++;
+		return (buffer[start - 1]);
+	}
+	return (EOF);
+}
+/**
  * get_line - reads a line from stdin
  *
  * Return: pointer to the line
@@ -19,7 +46,7 @@ char *get_line(void)
 	index = 0;
 	while (1)
 	{
-		c = getchar();
+		c = get_char();
 		if (c == EOF)
 		{
 			line[index] = EOF;
