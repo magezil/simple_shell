@@ -21,7 +21,7 @@ char *getpath(char *name)
 	if (path == NULL)
 		return (NULL);
 	_strcpy(path, getenv("PATH"));
-	tokens = tokenize_line(path, ":"); 
+	tokens = tokenize_line(path, ":");
 	for (i = 0; tokens[i] != NULL; i++)
 	{
 		_strcpy(temp, tokens[i]);

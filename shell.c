@@ -2,6 +2,8 @@
 /**
  * main - simple shell program that takes user input and interprets it as unix
  * commands
+ * @argc: number of command line arguments
+ * @argv: list of command line arguments
  *
  * Return: 0 (success)
  */
@@ -22,7 +24,7 @@ int main(int argc, char *argv[])
 		if (status == -1)
 		{
 			perror(argv[0]);
-			return -1;
+			return (-1);
 		}
 		return (status);
 	}
@@ -48,7 +50,8 @@ int main(int argc, char *argv[])
 			if (_strcmp(tokens[0], "exit") == 0)
 			{
 				if (tokens[1] != NULL)
-					return (atoi(tokens[1]));
+					return (_atoi(tokens[1]));
+				free(line), free(tokens);
 				return (0);
 			}
 			child = fork();
@@ -74,15 +77,18 @@ int main(int argc, char *argv[])
 					break;
 				}
 				else
+				{
+					free(line);
 					execv(path, tokens);
+				}
 			}
 			else
 			{
-				wait(&status);
-				free(line);
 				free(tokens);
+				wait(&status);
 			}
 		}
+		free(line);
 	}
 	return (0);
 }
