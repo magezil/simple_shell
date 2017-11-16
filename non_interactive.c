@@ -20,7 +20,7 @@ int non_interactive_mode(void)
 		free(line);
 		free(tokens);
 		if (tokens[1] != NULL)
-			return (atoi(tokens[1]));
+			return (_atoi(tokens[1]));
 		return (0);
 	}
 	child = fork();

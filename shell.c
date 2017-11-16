@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 			if (_strcmp(tokens[0], "exit") == 0)
 			{
 				if (tokens[1] != NULL)
-					return (atoi(tokens[1]));
+					return (_atoi(tokens[1]));
 				return (0);
 			}
 			child = fork();
