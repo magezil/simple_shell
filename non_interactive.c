@@ -13,7 +13,7 @@ void non_interactive_mode(void)
 	struct stat st;
 
 	line = get_line();
-	tokens = tokenize_line(line);
+	tokens = tokenize_line(line, " ");
 	child = fork();
 	if (child == -1)
 	{
