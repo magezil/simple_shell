@@ -2,6 +2,8 @@
 /**
  * main - simple shell program that takes user input and interprets it as unix
  * commands
+ * @argc: number of command line arguments
+ * @argv: list of command line arguments
  *
  * Return: 0 (success)
  */
@@ -22,7 +24,7 @@ int main(int argc, char *argv[])
 		if (status == -1)
 		{
 			perror(argv[0]);
-			return -1;
+			return (-1);
 		}
 		return (status);
 	}

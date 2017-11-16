@@ -2,6 +2,7 @@
 /**
  * tokenize_line - breaks a line up into tokens
  * @line: line to break up
+ * @delim: delimiter to use to break up
  *
  * Return: pointer to an array of strings (tokens)
  */
