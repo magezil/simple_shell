@@ -12,7 +12,6 @@ int main(__attribute__((unused))int argc, char *argv[])
 	pid_t child;
 	char *line, **tokens;
 	int status;
-	struct stat st;
 
 	child = getpid();
 	while (child != 0)
@@ -36,17 +35,9 @@ int main(__attribute__((unused))int argc, char *argv[])
 				free(line), free(tokens);
 				return (status);
 			}
-			child = fork();
+			child = run(argv[0], line, tokens);
 			if (child == -1)
-			{
-				errno = ECHILD, perror(argv[0]);
-				free(line), free(tokens);
 				return (-1);
-			}
-			else if (child == 0 && builtins(line) == 1 && execute(tokens, &st) == 1)
-					perror(argv[0]);
-			else
-				wait(&status);
 			free(tokens);
 		}
 		free(line);

@@ -48,3 +48,32 @@ int execute(char **tokens, struct stat *st)
 	}
 	return (1);
 }
+
+/**
+ * run - creates child
+ *
+ * Return: 0 for child, -1 for error, anything else for parent
+ */
+pid_t run(char *prog, char *line, char **tokens)
+{
+	pid_t child;
+	int status;
+	struct stat st;
+
+	child = fork();
+	if (child == -1)
+	{
+		errno = ECHILD, perror(prog);
+		free(line), free(tokens);
+		return (-1);
+	}
+	if (child == 0)
+	{
+		if (builtins(line) == 1)
+			if (execute(tokens, &st) == 1)
+				perror(prog);
+	}
+	else
+		wait(&status);
+	return (child);
+}
