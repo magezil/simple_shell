@@ -1,0 +1,4 @@
+#!/bin/bash
+gcc -Wall -Werror -Wextra -pedantic -g3 *.c -o shell
+./shell
+echo $?

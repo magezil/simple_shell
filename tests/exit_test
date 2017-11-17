@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "exit" | ./shell
+echo $?
+echo "exit 98" | ./shell
+echo $?
