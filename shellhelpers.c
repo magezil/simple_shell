@@ -2,7 +2,7 @@
 
 /**
  * printprompt - prints the prompt if not in interactive mode
- * @PS1 - prompt
+ * @prompt: prompt style
  */
 void printprompt(char *prompt)
 {
@@ -51,6 +51,9 @@ int execute(char **tokens, struct stat *st)
 
 /**
  * run - creates child
+ * @prog: program name
+ * @line: command line
+ * @tokens: tokens
  *
  * Return: 0 for child, -1 for error, anything else for parent
  */
