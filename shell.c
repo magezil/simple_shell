@@ -18,6 +18,7 @@ int main(__attribute__((unused))int argc, char *argv[])
 	{
 		if (isatty(0))
 			printprompt("simple_shell$ ");
+		signal(SIGINT, SIG_IGN);
 		line = get_line();
 		if (line == NULL)
 		{
@@ -31,7 +32,7 @@ int main(__attribute__((unused))int argc, char *argv[])
 				write(1, "\n", 1);
 			return (0);
 		}
-		else if (line[0] != '\0' && strcmp(line, ".") && strcmp(line, ".."))
+		else if (line[0] != '\0' && _strcmp(line, ".") && _strcmp(line, ".."))
 		{
 			tokens = tokenize_line(line, " ");
 			if (_strcmp(tokens[0], "exit") == 0)
