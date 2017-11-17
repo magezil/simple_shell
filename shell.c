@@ -25,7 +25,10 @@ int main(__attribute__((unused))int argc, char *argv[])
 			return (-1);
 		}
 		else if (line[0] == EOF)
+		{	free(line);
 			write(1, "\n", 1);
+			return (0);
+		}
 		else if (line[0] != '\0' && strcmp(line, ".") && strcmp(line, ".."))
 		{
 			tokens = tokenize_line(line, " ");
