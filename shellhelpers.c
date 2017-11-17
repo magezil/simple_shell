@@ -13,25 +13,17 @@ void printprompt(char *prompt)
 
 /**
  * builtins - runs builtins
- * @tokens: tokenized line with command to run
+ * @line: builtin to run
  *
  * Return: 0 if success, 1 otherwise
  */
-int builtins(char **tokens)
+int builtins(char *line)
 {
-	char cwd[BUF_SIZE];
-
-	if (tokens == NULL || *tokens == NULL)
+	if (line == NULL)
 		return (1);
-	if (_strcmp(tokens[0], "env") == 0)
+	if (_strcmp(line, "env") == 0)
 	{
 		printenv();
-		return (0);
-	}
-	if (_strcmp(tokens[0], "cd") == 0)
-	{
-		if (_strcmp(tokens[1], getcwd(cwd, BUF_SIZE)) != 0)
-			chdir(tokens[1]);
 		return (0);
 	}
 	return (1);
@@ -80,7 +72,7 @@ pid_t run(char *prog, char *line, char **tokens)
 	}
 	if (child == 0)
 	{
-		if (builtins(tokens) == 1)
+		if (builtins(line) == 1)
 			if (execute(tokens, &st) == 1)
 				perror(prog);
 	}
