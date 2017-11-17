@@ -7,10 +7,12 @@
 int get_char(void)
 {
 	static char buffer[MAX];
-	static size_t start = 0;
-	static size_t end = 0;
+	static size_t start;
+	static size_t end;
 	int c = 0;
- 
+
+	start = 0;
+	end = 0;
 	if (start == end) /* buffer is empty */
 	{
 		c = read(0, buffer, 1024);
