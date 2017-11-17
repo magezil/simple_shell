@@ -44,7 +44,7 @@ int main(__attribute__((unused))int argc, char *argv[])
 			free(tokens);
 		}
 		free(line);
-		if (!isatty(0) || line[0] == EOF)
+		if (!isatty(0))
 			break;
 	}
 	return (0);
