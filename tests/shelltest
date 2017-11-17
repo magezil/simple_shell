@@ -3,6 +3,11 @@ echo "Test 1 - invalid command"
 echo "test1" | ./shell
 echo "" | ./shell
 echo "Test 2 - valid command"
+echo "/bin/ls"
 echo "/bin/ls" | ./shell
+echo "/bin/pwd"
 echo "/bin/pwd" | ./shell
+echo "/usr/bin/whoami"
 echo "/usr/bin/whoami" | ./shell
+echo "shelltest"
+echo "./shelltest" | ./shell
