@@ -19,7 +19,7 @@ char **tokenize_line(char *line, char *delim);
 int _putchar(int c);
 
 void printprompt(char *prompt);
-int builtins(char **tokens);
+int builtins(char *line);
 int execute(char **tokens, struct stat *st);
 pid_t run(char *prog, char *line, char **tokens);
 
