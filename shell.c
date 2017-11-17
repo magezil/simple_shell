@@ -7,88 +7,42 @@
  *
  * Return: 0 (success)
  */
-int main(int argc, char *argv[])
+int main(__attribute__((unused))int argc, char *argv[])
 {
 	pid_t child;
-	char *line;
-	char *path;
-	char *PS1;
-	char **tokens;
+	char *line, **tokens;
 	int status;
-	struct stat st;
-	(void) argc;
 
-	if (!isatty(0))
+	child = getpid();
+	while (child != 0)
 	{
-		status = non_interactive_mode();
-		if (status == -1)
-		{
-			perror(argv[0]);
-			return (-1);
-		}
-		return (status);
-	}
-	while (1)
-	{
-		PS1 = "simple_shell$ ";
-		write(1, PS1, _strlen(PS1));
+		if (isatty(0))
+			printprompt("simple_shell$ ");
 		line = get_line();
 		if (line == NULL)
 		{
-			perror("Invalid line");
+			errno = EINVAL, perror(argv[0]);
 			return (-1);
 		}
 		else if (line[0] == EOF)
-		{
 			write(1, "\n", 1);
-			free(line);
-			break;
-		}
-		else if (line[0] != '\0')
+		else if (line[0] != '\0' && strcmp(line, ".") && strcmp(line, ".."))
 		{
 			tokens = tokenize_line(line, " ");
 			if (_strcmp(tokens[0], "exit") == 0)
 			{
-				if (tokens[1] != NULL)
-					return (_atoi(tokens[1]));
+				status = tokens[1] == NULL ? 0 : _atoi(tokens[1]);
 				free(line), free(tokens);
-				return (0);
+				return (status);
 			}
-			child = fork();
+			child = run(argv[0], line, tokens);
 			if (child == -1)
-			{
-				perror("Failed to create process");
-				free(line);
 				return (-1);
-			}
-			else if (child == 0)
-			{
-				if (_strcmp(line, "env") == 0)
-				{
-					printenv();
-					break;
-				}
-				path = getpath(tokens[0]);
-				if (path == NULL || stat(path, &st) != 0)
-				{
-					perror(argv[0]);
-					free(line);
-					free(tokens);
-					break;
-				}
-				else
-				{
-					free(line);
-					execv(path, tokens);
-				}
-			}
-			else
-			{
-				free(tokens);
-				wait(&status);
-			}
+			free(tokens);
 		}
 		free(line);
+		if (!isatty(0) || line[0] == EOF)
+			break;
 	}
 	return (0);
 }
