@@ -17,6 +17,10 @@ char *get_line(void);
 char **tokenize_line(char *line, char *delim);
 int _putchar(int c);
 
+void printprompt(char *prompt);
+int builtins(char *line);
+int execute(char **tokens, struct stat *st);
+
 void printenv(void);
 char *getpath(char *name);
 char *_getenv(const char *name);

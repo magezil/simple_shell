@@ -10,7 +10,7 @@
 int main(__attribute__((unused))int argc, char *argv[])
 {
 	pid_t child;
-	char *line, *path, *PS1, **tokens;
+	char *line, **tokens;
 	int status;
 	struct stat st;
 
@@ -18,10 +18,7 @@ int main(__attribute__((unused))int argc, char *argv[])
 	while (child != 0)
 	{
 		if (isatty(0))
-		{
-			PS1 = "simple_shell$ ";
-			write(1, PS1, _strlen(PS1));
-		}
+			printprompt("simple_shell$ ");
 		line = get_line();
 		if (line == NULL)
 		{
@@ -46,18 +43,8 @@ int main(__attribute__((unused))int argc, char *argv[])
 				free(line), free(tokens);
 				return (-1);
 			}
-			else if (child == 0)
-			{
-				if (_strcmp(line, "env") == 0)
-					printenv();
-				else
-				{
-					path = getpath(tokens[0]);
-					if (path != NULL && stat(path, &st) == 0)
-						execv(path, tokens);
+			else if (child == 0 && builtins(line) == 1 && execute(tokens, &st) == 1)
 					perror(argv[0]);
-				}
-			}
 			else
 				wait(&status);
 			free(tokens);
