@@ -1,0 +1,54 @@
+.TH hsh 1 "November 17, 2017" "1.0" "hsh Manual"
+
+.SH NAME
+hsh \- Simple UNIX command interpreter.
+
+.SH SYNOPSIS
+.B ./hsh
+.I No options available.
+
+.SH DESCRIPTION
+.B hsh
+is a simplified shell that interprets input from the user as UNIX commands and
+executes them. This shell was inspired by the first UNIX shell
+created by Ken Thompson. hsh was developed in Ubuntu
+14.04 LTS, compiled with GCC 4.8.4, and is designed to run in Unix-like environments. 
+.TP
+.SH Invocation:
+Invocate the shell in interactive mode by executing the command:
+.br
+.\&
+.RS
+\&$ ./hsh. 
+
+A prompt
+will appear and the user may begin entering commands and executing them by
+pressing "Enter". 
+
+Alternatively, a command can be entered and then piped into ./hsh. For example: 
+.br
+.\&
+\&$ echo "hello world" | ./hsh
+
+.SH BUILTINS
+The following builtin commands are supported:
+.br
+.br
+.B env
+- prints the environment
+.br
+.\&
+.B exit
+- exits the program
+
+.SH BUGS
+No known bugs. Please report any bugs to the authors.
+
+.SH AUTHORS
+.br
+Liz Magalindan
+.br
+Lee Gaines
+
+.SH SEE ALSO
+sh
