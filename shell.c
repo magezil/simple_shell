@@ -13,12 +13,12 @@ int main(__attribute__((unused))int argc, char *argv[])
 	char *line, **tokens;
 	int status;
 
+	signal(SIGINT, SIG_IGN);
 	child = getpid();
 	while (child != 0)
 	{
 		if (isatty(0))
 			printprompt("simple_shell$ ");
-		signal(SIGINT, SIG_IGN);
 		line = get_line();
 		if (line == NULL)
 		{
