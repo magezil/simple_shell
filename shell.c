@@ -13,6 +13,7 @@ int main(__attribute__((unused))int argc, char *argv[])
 	char *line, **tokens;
 	int status;
 
+	signal(SIGINT, SIG_IGN);
 	child = getpid();
 	while (child != 0)
 	{
@@ -25,11 +26,13 @@ int main(__attribute__((unused))int argc, char *argv[])
 			return (-1);
 		}
 		else if (line[0] == EOF)
-		{	free(line);
-			write(1, "\n", 1);
+		{
+			free(line);
+			if (isatty(0))
+				write(1, "\n", 1);
 			return (0);
 		}
-		else if (line[0] != '\0' && strcmp(line, ".") && strcmp(line, ".."))
+		else if (line[0] != '\0' && _strcmp(line, ".") && _strcmp(line, ".."))
 		{
 			tokens = tokenize_line(line, " ");
 			if (_strcmp(tokens[0], "exit") == 0)
@@ -44,8 +47,6 @@ int main(__attribute__((unused))int argc, char *argv[])
 			free(tokens);
 		}
 		free(line);
-		if (!isatty(0))
-			break;
 	}
 	return (0);
 }
