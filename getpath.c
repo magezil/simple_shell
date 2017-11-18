@@ -30,11 +30,11 @@ char *getpath(char *name)
 		if (stat(temp, &st) == 0)
 		{
 			name = temp;
-			free(tokens);
 			return (name);
 		}
 	}
 	/* not found */
+	free(path);
 	free(tokens);
 	return (NULL);
 }
