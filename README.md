@@ -1,16 +1,14 @@
 # Simple_shell
 
-## Write a simple `UNIX` command interpreter in C
+Write a simple `UNIX` command interpreter in C
 
-### This README is under construction
-
-### Compilation
+## Compilation
 
 `gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`
 
-### Usage
+## Usage
 
-#### Interactive mode
+### Interactive mode
 `$ ./hsh
 hsh$ /bin/ls
 hsh main.c shell.c
@@ -18,25 +16,29 @@ hsh$
 hsh$ exit
 $ `
 
-#### Non-interactive mode
+### Non-interactive mode
 `$ echo "/bin/ls" | ./hsh
 hsh main.c shell.c
 $`
 
-### Files
+## Files
 
-#### README.md
+### README.md
 README file for simple shell
 
-#### man_1_simple_shell
+### man_1_simple_shell
 man page for simple shell
 
-#### AUTHORS
+### AUTHORS
 Contributing authors for this project
 
-#### shell.h
+### shell.h
 Header file for simple shell program
 
-#### shell.c
+### shell.c
 Program that runs simple shell
 
+Other files included contain helper functions for the simple shell
+
+## `/tests`
+Folder contains all tests
