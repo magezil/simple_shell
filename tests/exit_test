@@ -1,5 +1,27 @@
 #!/bin/bash
+#
+# Perform exit state tests
 echo "exit" | ./shell
 echo $?
+echo "exit" | sh
+echo $?
 echo "exit 98" | ./shell
+echo $?
+echo "exit 98" | sh
+echo $?
+echo "    exit 98" | ./shell
+echo $?
+echo "    exit 98" | sh
+echo $?
+echo "    exit             98" | ./shell
+echo $?
+echo "    exit             98" | sh
+echo $?
+echo "exit 101" | ./shell
+echo $?
+echo "exit 101" | sh
+echo $?
+echo "exit 99999" | ./shell
+echo $?
+echo "exit 99999" | sh
 echo $?

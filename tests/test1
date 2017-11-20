@@ -1,2 +1,4 @@
 #!/bin/bash
+#
+# Use to test if shell will execute local programs
 echo "I am a test"

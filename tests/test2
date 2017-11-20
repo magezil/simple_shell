@@ -1,0 +1,3 @@
+/bin/ls
+echo "hello world"
+/bin/ls
