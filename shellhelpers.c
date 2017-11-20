@@ -41,7 +41,7 @@ int execute(char **tokens, struct stat *st)
 	char *path;
 
 	path = getpath(tokens[0]);
-	if (path != NULL && stat(path, st) == 0)
+	if (path != NULL && stat(path, st) == 0 && access(path, X_OK) == 0)
 	{
 		execv(path, tokens);
 		return (0);
