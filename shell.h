@@ -12,6 +12,7 @@
 #define BUF_SIZE 200
 #define ARG_SIZE 10
 #define MAX 1024
+#define DELIM " \t\r"
 extern char **environ;
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *get_line(void);
