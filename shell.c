@@ -34,7 +34,7 @@ int main(__attribute__((unused))int argc, char *argv[])
 		}
 		else if (line[0] != '\0' && _strcmp(line, ".") && _strcmp(line, ".."))
 		{
-			tokens = tokenize_line(line, " ");
+			tokens = tokenize_line(line, DELIM);
 			if (_strcmp(tokens[0], "exit") == 0)
 			{
 				status = tokens[1] == NULL ? 0 : _atoi(tokens[1]);
