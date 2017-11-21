@@ -34,6 +34,7 @@ char *getpath(char *name)
 		}
 	}
 	/* not found */
+	free(path);
 	free(tokens);
 	return (NULL);
 }
