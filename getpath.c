@@ -25,7 +25,7 @@ char *getpath(char *name)
 	{
 		_strcpy(temp, "./");
 		_strcat(temp, name);
-		if (access(temp, F_OK) == 0)
+		if (access(temp, F_OK | X_OK) == 0)
 			return (temp);
 	}
 	tokens = tokenize_line(path, ":");
