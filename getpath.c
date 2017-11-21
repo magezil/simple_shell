@@ -8,7 +8,7 @@
 char *getpath(char *name)
 {
 	char *path;
-	char temp[BUF_SIZE] = {'\0'};
+	static char temp[BUF_SIZE] = {'\0'};
 	char **tokens;
 	int i;
 	struct stat st;
@@ -21,6 +21,13 @@ char *getpath(char *name)
 	if (path == NULL)
 		return (NULL);
 	_strcpy(path, getenv("PATH"));
+	if (path[0] == ':')
+	{
+		_strcpy(temp, "./");
+		_strcat(temp, name);
+		if (access(temp, F_OK) == 0)
+			return (temp);
+	}
 	tokens = tokenize_line(path, ":");
 	for (i = 0; tokens[i] != NULL; i++)
 	{
