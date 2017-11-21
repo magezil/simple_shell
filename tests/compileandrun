@@ -1,4 +1,6 @@
 #!/bin/bash
+#
+# Compile shell and run in interactive mode - echo end state
 gcc -Wall -Werror -Wextra -pedantic -g3 *.c -o shell
 ./shell
 echo $?

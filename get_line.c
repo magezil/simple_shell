@@ -2,28 +2,25 @@
 /**
  * get_char - reads an input of a character
  *
- * Return: the character read casted as an int
+ * Return: the contents of the buffer one character at a time
  */
 int get_char(void)
 {
 	static char buffer[MAX];
-	static size_t start;
-	static size_t end;
+	static int start;
+	static int end;
 	int c = 0;
 
-	if (start == end) /* buffer is empty */
+	if (start == end)
 	{
-		c = read(0, buffer, 1024);
+		c = read(0, buffer, MAX);
 		if (c == 0)
 			return (EOF);
 		start = 0;
 		end = c;
 	}
 	if (c >= 0)
-	{
-		start++;
-		return (buffer[start - 1]);
-	}
+		return (buffer[start++]);
 	return (EOF);
 }
 /**

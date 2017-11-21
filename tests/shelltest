@@ -1,13 +1,60 @@
 #!/bin/bash
+#
+# Perform tests for simple shell (echo to print test condition)
 echo "Test 1 - invalid command"
+echo "test1"
 echo "test1" | ./shell
+echo "test1" | sh
+echo ""
 echo "" | ./shell
+echo "" | sh
+echo "test2"
+echo "./test2" | ./shell
+echo "./test2" | sh
 echo "Test 2 - valid command"
 echo "/bin/ls"
 echo "/bin/ls" | ./shell
+echo "/bin/ls" | sh
 echo "/bin/pwd"
 echo "/bin/pwd" | ./shell
+echo "/bin/pwd" | sh
 echo "/usr/bin/whoami"
 echo "/usr/bin/whoami" | ./shell
-echo "shelltest"
-echo "./shelltest" | ./shell
+echo "/usr/bin/whoami" | sh
+echo "test1"
+echo "./test1" | ./shell
+echo "./test1" | sh
+echo "Test 3 - valid command with arguments"
+echo "/bin/ls -l"
+echo "/bin/ls -l" | ./shell
+echo "/bin/ls -l" | sh
+echo "/bin/ls -l shell"
+echo "/bin/ls -l shell" | ./shell
+echo "/bin/ls -l shell" | sh
+echo "echo \"hello world\""
+echo "echo \"hello world\"" | ./shell
+echo "echo \"hello world\"" | sh
+echo "."
+echo "." | ./shell
+echo "." | sh
+echo ".."
+echo ".." | ./shell
+echo ".." | sh
+echo "Test 4 - environment test"
+echo "ENV BUILTIN TEST"
+echo "env" |./shell
+echo -e "\nENV BUILTIN TEST"
+echo "env" | sh
+echo "Test 5 - PATH tests"
+echo "ls"
+echo "ls" | ./shell
+echo "ls" | sh
+echo "which ls"
+echo "which ls" | ./shell
+echo "which ls" | sh
+echo "ls -al"
+echo "ls -al" | ./shell
+echo "ls -al" | sh
+echo "cat test2"
+cat test2 |./shell
+cat test2 | sh

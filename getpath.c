@@ -8,7 +8,7 @@
 char *getpath(char *name)
 {
 	char *path;
-	static char temp[BUF_SIZE] = {'\0'};
+	static char temp[BUF_SIZE];
 	char **tokens;
 	int i;
 	struct stat st;

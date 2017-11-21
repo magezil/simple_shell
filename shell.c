@@ -11,11 +11,11 @@ int main(__attribute__((unused))int argc, char *argv[])
 {
 	pid_t child;
 	char *line, **tokens;
-	int status;
+	int status, loop_count = 0;
 
 	signal(SIGINT, SIG_IGN);
 	child = getpid();
-	while (child != 0)
+	while (child > 0)
 	{
 		if (isatty(0))
 			printprompt("simple_shell$ ");
@@ -34,19 +34,18 @@ int main(__attribute__((unused))int argc, char *argv[])
 		}
 		else if (line[0] != '\0' && _strcmp(line, ".") && _strcmp(line, ".."))
 		{
-			tokens = tokenize_line(line, " ");
+			tokens = tokenize_line(line, DELIM);
 			if (_strcmp(tokens[0], "exit") == 0)
 			{
 				status = tokens[1] == NULL ? 0 : _atoi(tokens[1]);
 				free(line), free(tokens);
 				return (status);
 			}
-			child = run(argv[0], line, tokens);
-			if (child == -1)
-				return (-1);
+			child = run(argv[0], line, tokens, loop_count);
 			free(tokens);
 		}
 		free(line);
+		loop_count++;
 	}
-	return (0);
+	return (child == -1 ? -1 : 0);
 }
